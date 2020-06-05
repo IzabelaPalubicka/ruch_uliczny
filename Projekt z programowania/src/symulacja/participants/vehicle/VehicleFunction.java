@@ -13,7 +13,8 @@ public interface VehicleFunction extends RandomPositionOccupation {
     PositionOccupation seeObstacle(int coordinateX, int coordinateY);
 
     public void move(int maxSpeed, int coordinateX, int coordinateY);
-
+    
+     public int speed(int maxSpeed);
 
 }
 
