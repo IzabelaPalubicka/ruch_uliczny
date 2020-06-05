@@ -15,9 +15,9 @@ public class Cop implements RandomPositionOccupation {
 
     }
 
-    boolean speedingPenalty(int speed, int vehicalCoordinateX, int copCoordinateX) {
+    boolean speedingPenalty(int speed, int vehicleCoordinateX, int copCoordinateX) {
 
-        if (copCoordinateX == vehicalCoordinateX) {
+        if (copCoordinateX == vehicleCoordinateX) {
             if (speed > 50) fine = true;
             else fine = false;
         }
