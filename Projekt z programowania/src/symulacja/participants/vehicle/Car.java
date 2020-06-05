@@ -6,13 +6,12 @@ import java.util.Random;
 
 public class Car extends Vehicle {
 
-    public Car(int maxSpeed) {
-        super(maxSpeed);
+    public Car(int maxSpeed, int speed) {
+        super(maxSpeed, speed);
     }
 
     private int speedSlowerCar;
     private int speedSlowerBicycle;
-
 
 
     public int coordinateX() {
@@ -24,7 +23,7 @@ public class Car extends Vehicle {
         return x;
     }
 
-    public int coordinateY() {
+    public int coordinateY(int coordinateX) {
         if (coordinateX == 2) {
             coordinateY = 4;
         } else {
@@ -43,63 +42,53 @@ public class Car extends Vehicle {
         return super.seeObstacle(coordinateX, coordinateY);
     }
 
-    @Override
-    protected int speed(int maxSpeed) {
-        return super.speed(maxSpeed);
-    }
 
     public void accelerate(int speed, int maxSpeed) {
         super.accelerate(speed, maxSpeed);
     }
 
 
-    public void move(int maxSpeed) throws InterruptedException {
+    public void move(int speed, int coordinateX, int coordinateY) {
         if (coordinateX == 1) {
-            for (; coordinateX == 31; coordinateX++) {
-                Thread.sleep(maxSpeed * 1000);//inaczej bez 1000 będą milisekundy
+            coordinateX += (speed / 10);
+            switch (seeObstacle(coordinateX, coordinateY)) {
+                case HUMAN:
+                case DOG:
+                case RED:
+                    slowDown(maxSpeed, 0);
+                    break;
+                case BICYCLE:
+                    slowDown(speed, speedSlowerBicycle);
+                    break;
+                case CAR:
+                    slowDown(speed, speedSlowerCar);
+                    break;
+                case COP:
+                    slowDown(maxSpeed, PERMISSIBLE_SPEED);
+                    break;
+                default:
+                    accelerate(speed, maxSpeed);
 
-                switch (seeObstacle(coordinateX, coordinateY)) {
-                    case HUMAN:
-                    case DOG:
-                    case RED:
-                        slowDown(maxSpeed, 0);
-                        break;
-                    case BICYCLE:
-                        slowDown(speed, speedSlowerBicycle);
-                        break;
-                    case CAR:
-                        slowDown(speed, speedSlowerCar);
-                        break;
-                    case COP:
-                        slowDown(maxSpeed, PERMISSIBLE_SPEED);
-                        break;
-                    default:
-                        accelerate(speed, maxSpeed);
-                }
             }
         } else {
-            for (; coordinateX == 0; coordinateX--) {
-
-                Thread.sleep(maxSpeed * 1000);//inaczej bez 1000 będą milisekundy
-
-                switch (seeObstacle(coordinateX, coordinateY)) {
-                    case HUMAN:
-                    case DOG:
-                    case RED:
-                        slowDown(maxSpeed, 0);
-                        break;
-                    case COP:
-                        slowDown(maxSpeed, PERMISSIBLE_SPEED);
-                        break;
-                    case BICYCLE:
-                        slowDown(speed, speedSlowerBicycle);
-                        break;
-                    case CAR:
-                        slowDown(speed, speedSlowerCar);
-                        break;
-                    default:
-                        accelerate(speed, maxSpeed);
-                }
+            coordinateX -= (speed / 10);
+            switch (seeObstacle(coordinateX, coordinateY)) {
+                case HUMAN:
+                case DOG:
+                case RED:
+                    slowDown(maxSpeed, 0);
+                    break;
+                case COP:
+                    slowDown(maxSpeed, PERMISSIBLE_SPEED);
+                    break;
+                case BICYCLE:
+                    slowDown(speed, speedSlowerBicycle);
+                    break;
+                case CAR:
+                    slowDown(speed, speedSlowerCar);
+                    break;
+                default:
+                    accelerate(speed, maxSpeed);
             }
         }
     }
