@@ -20,16 +20,16 @@ public class PedestrianCreatorList implements PedestrianCreator {
 
 
     @Override
-    public List<Pedestrian> creatorHuman() {
-        List<Pedestrian> humanList = new LinkedList<>();
+    public List<Human> creatorHuman() {
+        List<Human> humanList = new LinkedList<>();
         for(int i = 0; i < amountHuman; i++)
             humanList.add(new Human());
         return humanList;
     }
 
     @Override
-    public List<Pedestrian> creatorDogs() {
-        List<Pedestrian> dogList = new LinkedList<>();
+    public List<Dog> creatorDogs() {
+        List<Dog> dogList = new LinkedList<>();
         for(int i = 0; i < amountHuman; i++)
             dogList.add(new Dog());
         return dogList;
