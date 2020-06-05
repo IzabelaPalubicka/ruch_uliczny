@@ -11,22 +11,14 @@ public class Bicycle extends Vehicle {
         super(maxSpeed, speed);
     }
 
+    @Override
     public int coordinateX() {
-        int x = 0;
-        Random random = new Random();
-        while (x != 0 && x != 31) {
-            x = random.nextInt() % 32;
-        }
-        return x;
+        return super.coordinateX();
     }
 
+    @Override
     public int coordinateY(int coordinateX) {
-        if (coordinateX == 0) {
-            coordinateY = 4;
-        } else {
-            coordinateY = 1;
-        }
-        return coordinateY;
+        return super.coordinateY(coordinateX);
     }
 
     public void accelerate(int speed, int maxSpeed) {
@@ -44,6 +36,8 @@ public class Bicycle extends Vehicle {
 
 
     public void move(int speed, int coordinateX, int coordinateY) {
+
+        Map[coordinateX][coordinateY] = PositionOccupation.EMPTY;
         if (coordinateX == 1) {
             coordinateX += (speed / 10);
 
@@ -75,6 +69,8 @@ public class Bicycle extends Vehicle {
                     accelerate(speed, maxSpeed);
             }
         }
+
+        Map[coordinateX][coordinateY] = PositionOccupation.BICYCLE;
     }
 
 }
