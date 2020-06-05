@@ -10,27 +10,21 @@ public class Car extends Vehicle {
         super(maxSpeed, speed);
     }
 
+    @Override
+    public int coordinateX() {
+        return super.coordinateX();
+    }
+
+    @Override
+    public int coordinateY(int coordinateX) {
+        return super.coordinateY(coordinateX);
+    }
+
     private int speedSlowerCar;
     private int speedSlowerBicycle;
 
 
-     public int coordinateX() {
-        int x = 0;
-        Random random = new Random();
-        while (x != 0 && x != 31) {
-            x = random.nextInt() % 32;
-        }
-        return x;
-    }
 
-    public int coordinateY(int coordinateX) {
-        if (coordinateX == 0) {
-            coordinateY = 4;
-        } else {
-            coordinateY = 1;
-        }
-        return coordinateY;
-    }
 
     @Override
     public void slowDown(int speed1, int speed2) {
@@ -49,7 +43,8 @@ public class Car extends Vehicle {
 
 
     public void move(int speed, int coordinateX, int coordinateY) {
-        if (coordinateX == 1) {
+        Map[coordinateX][coordinateY] = PositionOccupation.EMPTY;
+        if (coordinateX == 0) {
             coordinateX += (speed / 10);
             switch (seeObstacle(coordinateX, coordinateY)) {
                 case HUMAN:
@@ -65,7 +60,6 @@ public class Car extends Vehicle {
                     break;
                 case COP:
                     slowDown(maxSpeed, PERMISSIBLE_SPEED);
-                    break;
                 default:
                     accelerate(speed, maxSpeed);
 
@@ -91,5 +85,6 @@ public class Car extends Vehicle {
                     accelerate(speed, maxSpeed);
             }
         }
+        Map[coordinateX][coordinateY] = PositionOccupation.CAR;
     }
 }
