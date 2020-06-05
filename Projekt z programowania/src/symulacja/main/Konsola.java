@@ -26,7 +26,7 @@ public class Konsola implements Consola {
     }
 
     public int setMaxSpeedCar() {
-        System.out.println("Prosze wporwadzic maxymalna predkosc auta na drodze");
+        System.out.println("Proszę wprowadzić maksymalną prędkość AUT na drodze:");
         Scanner scanner = new Scanner(System.in);
         maxSpeedCar = scanner.nextInt();
         return maxSpeedCar;
@@ -34,7 +34,7 @@ public class Konsola implements Consola {
 
     public int setMaxSpeedBicycle() {
 
-        System.out.println("Prosze wporwadzic maksymalna predkosc roweru na drodze");
+        System.out.println("Proszę wprowadzić maksymalną prędkość ROWERÓW na drodze:");
         Scanner scanner = new Scanner(System.in);
         maxSpeedBicycle = scanner.nextInt();
         return maxSpeedBicycle;
@@ -42,16 +42,16 @@ public class Konsola implements Consola {
 
     public int setSafeSpeedCar() {
         do {
-            System.out.println("Prosze wporwadzic bezpieczna predkosc auta na drodze");
+            System.out.println("Proszę wprowadzić bezpieczną prędkość AUT na drodze:");
             Scanner scanner = new Scanner(System.in);
             safeSpeedCar = scanner.nextInt();
-        }while(safeSpeedCar > maxSpeedBicycle);
+        }while(safeSpeedCar > maxSpeedCar);
         return safeSpeedCar;
     }
 
     public int setSafeSpeedBicycle() {
         do {
-            System.out.println("Prosze wporwadzic bezpieczna predkosc roweru na drodze");
+            System.out.println("Proszę wprowadzić bezpieczną prędkość ROWERÓW na drodze:");
             Scanner scanner = new Scanner(System.in);
             safeSpeedBicycle = scanner.nextInt();
         }while(safeSpeedBicycle > maxSpeedBicycle);
@@ -59,31 +59,32 @@ public class Konsola implements Consola {
     }
 
     public int setNumberCar() {
-        System.out.println("Prosze wporwadzic ilosc SAMOCHODÓW, ktore przejada po drodze");
+        System.out.println("Proszę wprowadzię ilość AUT, które przejadą po drodze");
         Scanner scanner = new Scanner(System.in);
         numberCar = scanner.nextInt();
         return numberCar;
     }
 
     public int setNumberBicycle() {
-        System.out.println("Prosze wporwadzic ilosc ROWERÓW, ktore przejada po drodze");
+        System.out.println("Proszę wprowadzię ilość ROWERÓW, które przejadą po drodze");
         Scanner scanner = new Scanner(System.in);
         numberBicycle = scanner.nextInt();
         return numberBicycle;
     }
 
     public int setNumberHuman() {
-        System.out.println("Prosze wporwadzic ilosc LUDZI, ktore przejda przez ulice");
+        System.out.println("Proszę wprowadzię ilość LUDZI, które przejadą po drodze");
         Scanner scanner = new Scanner(System.in);
         numberHuman = scanner.nextInt();
         return numberHuman;
     }
 
     public int setNumberDog() {
-        System.out.println("Prosze wporwadzic ilosc PSÓW, ktore przejda przez ulice");
+        System.out.println("Proszę wprowadzię ilość PSÓW, które przejadą po drodze");
         Scanner scanner = new Scanner(System.in);
         numberDog = scanner.nextInt();
         return numberDog;
     }
 }
+
 
