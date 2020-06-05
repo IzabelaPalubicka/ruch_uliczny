@@ -18,18 +18,18 @@ public class VehicleCreatorList implements VehicleCreator{
     }
 
     @Override
-    public List<VehicleFunction> creatorCars(Mapa mapa, int maxSpeed) {
+    public List<VehicleFunction> creatorCars(Mapa mapa, int maxSpeed, int speed) {
         List<VehicleFunction> carList = new LinkedList<>();
         for(int i = 0; i < amountCar; i++)
-            carList.add(new Car(maxSpeed));
+            carList.add(new Car(maxSpeed, speed));
         return carList;
     }
 
     @Override
-    public List<VehicleFunction> creatorBicycles(Mapa mapa, int maxSpeed) {
+    public List<VehicleFunction> creatorBicycles(Mapa mapa, int maxSpeed, int speed) {
         List<VehicleFunction> bicycleList = new LinkedList<>();
         for(int i = 0; i < amountCar; i++)
-            bicycleList.add(new Car(maxSpeed));
+            bicycleList.add(new Car(maxSpeed, speed));
         return bicycleList;
     }
 
