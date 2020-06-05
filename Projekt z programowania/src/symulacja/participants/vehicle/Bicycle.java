@@ -14,14 +14,14 @@ public class Bicycle extends Vehicle {
     public int coordinateX() {
         int x = 0;
         Random random = new Random();
-        while (x != 1 && x != 30) {
+        while (x != 0 && x != 31) {
             x = random.nextInt() % 32;
         }
         return x;
     }
 
     public int coordinateY(int coordinateX) {
-        if (coordinateX == 1) {
+        if (coordinateX == 0) {
             coordinateY = 4;
         } else {
             coordinateY = 1;
