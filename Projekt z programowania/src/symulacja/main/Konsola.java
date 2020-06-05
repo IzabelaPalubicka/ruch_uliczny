@@ -37,23 +37,28 @@ public class Konsola implements Consola {
     }
 
     public int setMaxSpeedBicycle() {
-        System.out.println("Prosze wporwadzic maksymalna predkosc roweru na drodze");
-        Scanner scanner = new Scanner(System.in);
-        int maxSpeedBicycle = scanner.nextInt();
+
+            System.out.println("Prosze wporwadzic maksymalna predkosc roweru na drodze");
+            Scanner scanner = new Scanner(System.in);
+            int maxSpeedBicycle = scanner.nextInt();
         return maxSpeedBicycle;
     }
 
     public int setSafeSpeedCar() {
-        System.out.println("Prosze wporwadzic bezpieczna predkosc auta na drodze");
-        Scanner scanner = new Scanner(System.in);
-        int safeSpeedCar = scanner.nextInt();
+        do {
+            System.out.println("Prosze wporwadzic bezpieczna predkosc auta na drodze");
+            Scanner scanner = new Scanner(System.in);
+            int safeSpeedCar = scanner.nextInt();
+        }while(safeSpeedCar > maxSpeedBicycle);
         return safeSpeedCar;
     }
 
     public int setSafeSpeedBicycle() {
-        System.out.println("Prosze wporwadzic bezpieczna predkosc roweru na drodze");
-        Scanner scanner = new Scanner(System.in);
-        int safeSpeedBicycle = scanner.nextInt();
+        do {
+            System.out.println("Prosze wporwadzic bezpieczna predkosc roweru na drodze");
+            Scanner scanner = new Scanner(System.in);
+            int safeSpeedBicycle = scanner.nextInt();
+        }while(safeSpeedBicycle >maxSpeedBicycle);
         return safeSpeedBicycle;
     }
 
