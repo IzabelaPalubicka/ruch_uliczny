@@ -2,17 +2,14 @@ package symulacja.participants.pedestrian;
 
 import symulacja.mapa.PositionOccupation;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public abstract class APedestrian implements Pedestrian {
 
     protected int coordinateX;
-    protected int firstCoordinateY;
     protected int coordinateY;
+    protected int firstCoordinateY;
     protected PositionOccupation positionOccupation;
-    protected int movingCoordinateY = 0;
-    List<Integer> movingStory = new LinkedList<>();
     protected PositionOccupation mapa[][];
 
     public APedestrian() {
@@ -20,25 +17,35 @@ public abstract class APedestrian implements Pedestrian {
         this.coordinateY = coordinateY();
         this.firstCoordinateY = coordinateY;
         this.positionOccupation = positionOccupation;
-        this.movingCoordinateY = movingCoordinateY;
-        this.movingStory = new LinkedList<>();
+       
     }
 
     @Override
-    public void crossing(int firstCoordinateY, int coordinateY, int coordinateX, List<Integer> movingStory) throws InterruptedException {
-        movingCoordinateY = firstCoordinateY;
+    public void crossing(int firstCoordinateY, int coordinateY, int coordinateX) {
         if (firstCoordinateY == 0)
-            rightPavementCrossing(coordinateY, coordinateX, movingStory);
+            rightPavementCrossing(coordinateY, coordinateX);
         else if (firstCoordinateY == 5)
-            leftPavementCrossing(coordinateY, coordinateX, movingStory);
+            leftPavementCrossing(coordinateY, coordinateX);
     }
 
     @Override
-    public void leftPavementCrossing(int coordinateY, int coordinateX, List<Integer> movingStory) throws InterruptedException {
+    public void leftPavementCrossing(int coordinateY, int coordinateX) {
+        if (coordinateY == 5)
+            System.gc();
+        else {
+            mapa[coordinateX][coordinateY] = positionOccupation.EMPTY;
+            mapa[coordinateX][coordinateY++] = positionOccupation.HUMAN;
+        }
     }
 
     @Override
-    public void rightPavementCrossing(int coordinateY, int coordinateX, List<Integer> movingStory) throws InterruptedException {
+    public void rightPavementCrossing(int coordinateY, int coordinateX) {
+        if (coordinateY == 0)
+            System.gc();
+        else {
+            mapa[coordinateX][coordinateY] = positionOccupation.EMPTY;
+            mapa[coordinateX][coordinateY--] = positionOccupation.DOG;
+        }
     }
 
 
