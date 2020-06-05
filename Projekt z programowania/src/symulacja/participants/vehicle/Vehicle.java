@@ -4,7 +4,7 @@ import symulacja.mapa.PositionOccupation;
 
 import java.util.Random;
 
-public class Vehicle extends VehicleProperties implements VehicleFunction {
+public abstract class Vehicle extends VehicleProperties implements VehicleFunction {
 
 
     public Vehicle(int maxSpeed, int speed) {
