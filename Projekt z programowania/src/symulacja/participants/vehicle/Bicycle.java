@@ -1,13 +1,14 @@
 package symulacja.participants.vehicle;
 
+import symulacja.mapa.Mapa;
 import symulacja.mapa.PositionOccupation;
 
 import java.util.Random;
 
 public class Bicycle extends Vehicle {
 
-    public Bicycle(int maxSpeed) {
-        super(maxSpeed);
+    public Bicycle(int maxSpeed, int speed) {
+        super(maxSpeed, speed);
     }
 
     public int coordinateX() {
@@ -19,7 +20,7 @@ public class Bicycle extends Vehicle {
         return x;
     }
 
-    public int coordinateY() {
+    public int coordinateY(int coordinateX) {
         if (coordinateX == 1) {
             coordinateY = 4;
         } else {
@@ -41,42 +42,37 @@ public class Bicycle extends Vehicle {
         return super.seeObstacle(coordinateX, coordinateY);
     }
 
-    public void move(int maxSpeed) throws InterruptedException {
-        if (coordinateX == 1) {
-            for (; coordinateX == 31; coordinateX++) {
-                Thread.sleep(maxSpeed * 1000);//inaczej bez 1000 będą milisekundy
 
-                switch (seeObstacle(coordinateX, coordinateY)) {
-                    case HUMAN:
-                    case DOG:
-                    case RED:
-                        slowDown(maxSpeed, 0);
-                        break;
-                    case COP:
-                        slowDown(maxSpeed, PERMISSIBLE_SPEED);
-                        break;
-                    default:
-                        accelerate(speed, maxSpeed);
-                }
+    public void move(int speed, int coordinateX, int coordinateY) {
+        if (coordinateX == 1) {
+            coordinateX += (speed / 10);
+
+            switch (seeObstacle(coordinateX, coordinateY)) {
+                case HUMAN:
+                case DOG:
+                case RED:
+                    slowDown(maxSpeed, 0);
+                    break;
+                case COP:
+                    slowDown(maxSpeed, PERMISSIBLE_SPEED);
+                    break;
+                default:
+                    accelerate(speed, maxSpeed);
             }
         } else {
-            for (; coordinateX == 0; coordinateX--) {
 
-                Thread.sleep(maxSpeed * 1000);//inaczej bez 1000 będą milisekundy
-
-                switch (seeObstacle(coordinateX, coordinateY)) {
-                    case HUMAN:
-                    case DOG:
-                    case RED:
-                        slowDown(maxSpeed, 0);
-                        break;
-                    case CAR:
-                        slowDown(maxSpeed, PERMISSIBLE_SPEED);
-                        break;
-                    default:
-                        accelerate(speed, maxSpeed);
-
-                }
+            coordinateY -= (speed / 10);
+            switch (seeObstacle(coordinateX, coordinateY)) {
+                case HUMAN:
+                case DOG:
+                case RED:
+                    slowDown(maxSpeed, 0);
+                    break;
+                case CAR:
+                    slowDown(maxSpeed, PERMISSIBLE_SPEED);
+                    break;
+                default:
+                    accelerate(speed, maxSpeed);
             }
         }
     }
