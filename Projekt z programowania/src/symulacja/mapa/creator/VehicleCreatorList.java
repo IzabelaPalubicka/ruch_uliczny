@@ -1,8 +1,9 @@
 package symulacja.mapa.creator;
 
 import symulacja.mapa.Mapa;
+import symulacja.participants.vehicle.Bicycle;
 import symulacja.participants.vehicle.Car;
-import symulacja.participants.vehicle.VehicleFunction;
+
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,18 +19,18 @@ public class VehicleCreatorList implements VehicleCreator{
     }
 
     @Override
-    public List<VehicleFunction> creatorCars(Mapa mapa, int maxSpeed, int speed) {
-        List<VehicleFunction> carList = new LinkedList<>();
+    public List<Car> creatorCars(Mapa mapa, int maxSpeed, int speed) {
+        List<Car> carList = new LinkedList<>();
         for(int i = 0; i < amountCar; i++)
             carList.add(new Car(maxSpeed, speed));
         return carList;
     }
 
     @Override
-    public List<VehicleFunction> creatorBicycles(Mapa mapa, int maxSpeed, int speed) {
-        List<VehicleFunction> bicycleList = new LinkedList<>();
-        for(int i = 0; i < amountCar; i++)
-            bicycleList.add(new Car(maxSpeed, speed));
+    public List<Bicycle> creatorBicycles(Mapa mapa, int maxSpeed, int speed) {
+        List<Bicycle> bicycleList = new LinkedList<>();
+        for(int i = 0; i < amountBicycle; i++)
+            bicycleList.add(new Bicycle(maxSpeed, speed));
         return bicycleList;
     }
 
