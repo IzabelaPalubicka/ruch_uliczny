@@ -14,17 +14,17 @@ public class Car extends Vehicle {
     private int speedSlowerBicycle;
 
 
-    public int coordinateX() {
+     public int coordinateX() {
         int x = 0;
         Random random = new Random();
-        while (x != 2 && x != 29) {
+        while (x != 0 && x != 31) {
             x = random.nextInt() % 32;
         }
         return x;
     }
 
     public int coordinateY(int coordinateX) {
-        if (coordinateX == 2) {
+        if (coordinateX == 0) {
             coordinateY = 4;
         } else {
             coordinateY = 1;
