@@ -7,8 +7,8 @@ import java.util.Random;
 public abstract class Vehicle extends VehicleProperties implements VehicleFunction {
 
 
-    public Vehicle(int maxSpeed, int speed) {
-        super(maxSpeed, speed);
+    public Vehicle(int maxSpeed) {
+        super(maxSpeed);
     }
 
 
@@ -71,6 +71,11 @@ public abstract class Vehicle extends VehicleProperties implements VehicleFuncti
     @Override
     public void move(int maxSpeed, int coordinateX, int coordinateY) {
 
+    }
+    
+    public int speed(int maxSpeed){
+        super.speed(maxSpeed);
+        return speed;
     }
 
 
