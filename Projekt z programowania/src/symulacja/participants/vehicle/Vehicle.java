@@ -2,11 +2,32 @@ package symulacja.participants.vehicle;
 
 import symulacja.mapa.PositionOccupation;
 
+import java.util.Random;
+
 public class Vehicle extends VehicleProperties implements VehicleFunction {
 
 
     public Vehicle(int maxSpeed, int speed) {
         super(maxSpeed, speed);
+    }
+
+
+    public int coordinateX() {
+        int x = 0;
+        Random random = new Random();
+        while (x != 0 && x != 31) {
+            x = random.nextInt() % 32;
+        }
+        return x;
+    }
+
+    public int coordinateY(int coordinateX) {
+        if (coordinateX == 0) {
+            coordinateY = 4;
+        } else {
+            coordinateY = 1;
+        }
+        return coordinateY;
     }
 
     public void accelerate(int speed, int maxSpeed) {
@@ -54,3 +75,4 @@ public class Vehicle extends VehicleProperties implements VehicleFunction {
 
 
 }
+
