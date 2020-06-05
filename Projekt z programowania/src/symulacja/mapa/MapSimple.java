@@ -16,7 +16,7 @@ public class MapSimple implements Mapa {
     public final int HIGH = 32;
     public final int WIDTH = 6;
     public PositionOccupation positionOccupation;
-    public PositionOccupation[][] mapa;// = new PositionOccupation[HIGH][WIDTH];
+    public PositionOccupation[][] mapa;
 
     public MapSimple() {
         this.mapa = makeMap();
