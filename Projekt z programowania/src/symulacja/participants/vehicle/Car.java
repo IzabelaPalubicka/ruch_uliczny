@@ -6,8 +6,8 @@ import java.util.Random;
 
 public class Car extends Vehicle {
 
-    public Car(int maxSpeed, int speed) {
-        super(maxSpeed, speed);
+    public Car(int maxSpeed) {
+        super(maxSpeed);
     }
 
     @Override
@@ -23,8 +23,10 @@ public class Car extends Vehicle {
     private int speedSlowerCar;
     private int speedSlowerBicycle;
 
-
-
+    public int speed(int maxSpeed){
+        super.speed(maxSpeed);
+        return speed;
+    }
 
     @Override
     public void slowDown(int speed1, int speed2) {
@@ -44,7 +46,7 @@ public class Car extends Vehicle {
 
     public void move(int speed, int coordinateX, int coordinateY) {
         Map[coordinateX][coordinateY] = PositionOccupation.EMPTY;
-        if (coordinateX == 0) {
+        if (coordinateY == 0) {
             coordinateX += (speed / 10);
             switch (seeObstacle(coordinateX, coordinateY)) {
                 case HUMAN:
