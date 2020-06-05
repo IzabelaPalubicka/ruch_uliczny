@@ -10,8 +10,6 @@ public class Konsola implements Consola {
     public int safeSpeedBicycle;
     public int numberCar;
     public int numberBicycle;
-    public int timeReactionCar;
-    public int timeReactionBicycle;
     public int numberHuman;
     public int numberDog;
 
@@ -22,8 +20,6 @@ public class Konsola implements Consola {
         this.safeSpeedBicycle = setSafeSpeedBicycle();
         this.numberCar =  setNumberCar();
         this.numberBicycle =  setNumberBicycle();
-        this.timeReactionCar = setTimeReactionCar();
-        this.timeReactionBicycle = setTimeReactionBicycle();
         this.numberHuman =  setNumberHuman();
         this.numberDog =  setNumberDog();
 
@@ -74,20 +70,6 @@ public class Konsola implements Consola {
         Scanner scanner = new Scanner(System.in);
         int numberBicycle = scanner.nextInt();
         return numberBicycle;
-    }
-
-    public int setTimeReactionCar() {
-        System.out.println("Prosze czas rekacji auta na drodze");
-        Scanner scanner = new Scanner(System.in);
-        int timeReactionCar = scanner.nextInt();
-        return timeReactionCar;
-    }
-
-    public int setTimeReactionBicycle() {
-        System.out.println("Prosze wporwadzic ilosc pojazdow, kotre przejada po drodze");
-        Scanner scanner = new Scanner(System.in);
-        int timeReactionBicycle = scanner.nextInt();
-        return timeReactionBicycle;
     }
 
     public int setNumberHuman() {
