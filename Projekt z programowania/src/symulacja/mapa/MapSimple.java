@@ -16,10 +16,10 @@ public class MapSimple implements Mapa {
     public final int HIGH = 32;
     public final int WIDTH = 6;
     public PositionOccupation positionOccupation;
-    public PositionOccupation[][] mapa;
+    public PositionOccupation[][] mapa = new PositionOccupation[HIGH][WIDTH];
 
     public MapSimple() {
-        this.mapa = makeMap();
+        mapa = makeMap();
     }
 
 
@@ -66,22 +66,54 @@ public class MapSimple implements Mapa {
 
     @Override
     public boolean settleBicycle(Bicycle bicycle) {
+        int coordinateX;
+        do {
+
+            coordinateX = bicycle.coordinateX();
+
+        } while (mapa[coordinateX][bicycle.coordinateY()] != PositionOccupation.EMPTY);
+
+        mapa[coordinateX][bicycle.coordinateY()] = PositionOccupation.CAR;
         return false;
     }
 
     @Override
     public boolean settleCar(Car car) {
+        int coordinateX;
+        do {
+
+            coordinateX = car.coordinateX();
+
+        } while (mapa[coordinateX][car.coordinateY()] != PositionOccupation.EMPTY);
+
+        mapa[coordinateX][car.coordinateY()] = PositionOccupation.CAR;
         return false;
     }
 
     @Override
     public boolean settleCop(Cop cop) {
+        int coordinateX;
+        int coordinateY;
+        do {
+
+            coordinateX = cop.coordinateX();
+            coordinateY = cop.coordinateY();
+
+        } while (mapa[coordinateX][coordinateY] != PositionOccupation.EMPTY);
+        mapa[coordinateX][coordinateY] = PositionOccupation.COP;
+
         return false;
     }
 
     @Override
-    public boolean TrafficLight(TrafficLights trafficLights) {
+    public boolean settleTrafficLight(TrafficLights trafficLights) {
+
+        if (trafficLights.light == true)
+            mapa[trafficLights.coordinateX][trafficLights.coordinateY] = PositionOccupation.GREEN;
+        if (trafficLights.light == false)
+            mapa[trafficLights.coordinateX][trafficLights.coordinateY] = PositionOccupation.RED;
         return false;
     }
-}
 
+
+}
