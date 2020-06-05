@@ -1,8 +1,5 @@
 package symulacja.participants.pedestrian;
 
-import symulacja.mapa.PositionOccupation;
-
-import java.util.List;
 import java.util.Random;
 
 public class Human extends APedestrian {
@@ -11,7 +8,7 @@ public class Human extends APedestrian {
     }
 
     @Override
-    public void crossing(int firstCoordinateX, int firstCoordinateY,int coordinateY, int coordinateX, List<Integer> movingStory) throws InterruptedException {
+    public void crossing(int firstCoordinateY,int coordinateY, int coordinateX) {
     }
 
 
@@ -34,36 +31,10 @@ public class Human extends APedestrian {
     }
 
     @Override
-    public void leftPavementCrossing(int coordinateY, int coordinateX, List<Integer> movingStory) throws InterruptedException {
-        movingCoordinateY = coordinateY;
-        for (int i = 1; i < 6; i++) {
-            if (movingCoordinateY == 5)
-                System.gc();
-            else {
-                movingCoordinateY++;
-                movingStory.add(coordinateY);
-                mapa[coordinateX][movingStory.get(movingCoordinateY) - 1] = positionOccupation.EMPTY;
-                mapa[coordinateX][movingCoordinateY++] = positionOccupation.HUMAN;
-                Thread.sleep(3000);
-            }
-        }
+    public void leftPavementCrossing(int coordinateY, int coordinateX) {
     }
 
     @Override
-    public void rightPavementCrossing(int coordinateY, int coordinateX, List<Integer> movingStory) throws InterruptedException {
-        movingCoordinateY = coordinateY;
-        for (int i = 1; i < 6; i++) {
-            if (movingCoordinateY == 0)
-                System.gc();
-            else {
-                movingCoordinateY--;
-                movingStory.add(movingCoordinateY);
-                mapa[coordinateX][movingStory.get(movingCoordinateY) + 1] = positionOccupation.EMPTY;
-                mapa[coordinateX][movingCoordinateY++] = positionOccupation.HUMAN;
-                Thread.sleep(3000);
-            }
-        }
-
-
+    public void rightPavementCrossing(int coordinateY, int coordinateX) {
     }
 }
