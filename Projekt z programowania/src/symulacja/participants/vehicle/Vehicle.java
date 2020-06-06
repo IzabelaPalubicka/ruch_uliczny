@@ -1,5 +1,6 @@
 package symulacja.participants.vehicle;
 
+import symulacja.mapa.MapSimple;
 import symulacja.mapa.PositionOccupation;
 
 import java.util.Random;
@@ -7,25 +8,24 @@ import java.util.Random;
 public abstract class Vehicle extends VehicleProperties implements VehicleFunction {
 
 
-    public Vehicle(int maxSpeed) {
-        super(maxSpeed);
+    public Vehicle(int maxSpeed, int speed) {
+        super(maxSpeed, speed);
     }
 
 
     public int coordinateX() {
-        int x = 0;
         Random random = new Random();
-        while (x != 0 && x != 31) {
-            x = random.nextInt() % 32;
-        }
-        return x;
+        do {
+            coordinateX = random.nextInt() % 32;
+        } while (coordinateX != 0 && coordinateX != 31);
+        return coordinateX;
     }
 
     public int coordinateY(int coordinateX) {
         if (coordinateX == 0) {
-            coordinateY = 4;
-        } else {
             coordinateY = 1;
+        } else {
+            coordinateY = 4;
         }
         return coordinateY;
     }
@@ -42,40 +42,36 @@ public abstract class Vehicle extends VehicleProperties implements VehicleFuncti
         }
     }
 
-    public PositionOccupation seeObstacle(int coordinateX, int coordinateY) {
+    public PositionOccupation seeObstacle(int coordinateX, int coordinateY, MapSimple position) {
         if (coordinateX == 1) {
             for (int i = 1; i == TIME_REACTION; i++)
                 for (int j = 0; j <= 4; j++) {
-                    if (Map[coordinateX + i][coordinateY - j] != positionOccupation.EMPTY) {
-                        return Map[coordinateX + i][coordinateY - j];
+                    if (position.mapa[coordinateX + i][coordinateY - j] != positionOccupation.EMPTY) {
+                        return position.mapa[coordinateX + i][coordinateY - j];
                     }
-                    if (i == TIME_REACTION && j == 4) {
+//                    if (i == TIME_REACTION && j == 4) {
+                    else
                         return positionOccupation.EMPTY;
-                    }
+
                 }
         } else {
             for (int i = 1; i == TIME_REACTION; i++)
                 for (int j = 0; j <= 4; j++) {
-                    if (Map[coordinateX - i][coordinateY + j] != positionOccupation.EMPTY) {
-                        return Map[coordinateX - i][coordinateY + j];
+                    if (position.mapa[coordinateX - i][coordinateY + j] != positionOccupation.EMPTY) {
+                        return position.mapa[coordinateX - i][coordinateY + j];
                     }
-                    if (i == TIME_REACTION && j == 4) {
-                        return positionOccupation.EMPTY;
-                    }
+//                    if (i == TIME_REACTION && j == 4) {
+                    else return positionOccupation.EMPTY;
                 }
         }
-
         return positionOccupation.EMPTY;
     }
 
-    @Override
-    public void move(int maxSpeed, int coordinateX, int coordinateY) {
 
-    }
-    
-    public int speed(int maxSpeed){
-        super.speed(maxSpeed);
-        return speed;
+
+
+    @Override
+    public void move(int maxSpeed, int coordinateX, int coordinateY, MapSimple position) {
     }
 
 
