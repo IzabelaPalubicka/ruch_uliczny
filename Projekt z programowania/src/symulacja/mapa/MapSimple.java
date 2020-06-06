@@ -4,12 +4,10 @@ import symulacja.participants.Cop;
 import symulacja.participants.TrafficLights;
 import symulacja.participants.pedestrian.Dog;
 import symulacja.participants.pedestrian.Human;
-import symulacja.mapa.Mapa;
 import symulacja.participants.vehicle.Bicycle;
 import symulacja.participants.vehicle.Car;
-import symulacja.participants.vehicle.VehicleFunction;
 
-import java.util.List;
+//import java.util.Random;
 
 public class MapSimple implements Mapa {
 
@@ -19,7 +17,7 @@ public class MapSimple implements Mapa {
     public PositionOccupation[][] mapa = new PositionOccupation[HIGH][WIDTH];
 
     public MapSimple() {
-        mapa = makeMap();
+        this.mapa = makeMap();
     }
 
 
@@ -37,76 +35,69 @@ public class MapSimple implements Mapa {
     }
 
     @Override
-    public boolean settleHuman(Human human) {
-        int coordinateX;
-        int coordinateY;
+    public boolean settleHuman(Human human,PositionOccupation[][] mapa) {
         do {
 
-            coordinateX = human.coordinateX();
-            coordinateY = human.coordinateY();
+            human.coordinateX = human.coordinateX();
+            human.coordinateY = human.coordinateY();
 
-        } while (mapa[coordinateX][coordinateY] != PositionOccupation.EMPTY);
-        mapa[coordinateX][coordinateY] = PositionOccupation.HUMAN;
+        } while (mapa[human.coordinateX][human.coordinateY] != PositionOccupation.EMPTY);
+        mapa[human.coordinateX][human.coordinateY] = PositionOccupation.HUMAN;
         return false;
     }
 
     @Override
-    public boolean settleDog(Dog dog) {
-        int coordinateX;
-        int coordinateY;
+    public boolean settleDog(Dog dog,PositionOccupation[][] mapa) {
         do {
 
-            coordinateX = dog.coordinateX();
-            coordinateY = dog.coordinateY();
+            dog.coordinateX = dog.coordinateX();
+            dog.coordinateY = dog.coordinateY();
 
-        } while (mapa[coordinateX][coordinateY] != PositionOccupation.EMPTY);
-        mapa[coordinateX][coordinateY] = PositionOccupation.DOG;
+        } while (mapa[dog.coordinateX][dog.coordinateY] != PositionOccupation.EMPTY);
+        mapa[dog.coordinateX][dog.coordinateY] = PositionOccupation.DOG;
         return false;
     }
 
     @Override
-    public boolean settleBicycle(Bicycle bicycle) {
-        int coordinateX;
+    public boolean settleBicycle(Bicycle bicycle,PositionOccupation[][] mapa) {
         do {
 
-            coordinateX = bicycle.coordinateX();
+           bicycle.coordinateX = bicycle.coordinateX();
+           bicycle.coordinateY = bicycle.coordinateY(bicycle.coordinateX);
 
-        } while (mapa[coordinateX][bicycle.coordinateY()] != PositionOccupation.EMPTY);
+        } while (mapa[bicycle.coordinateX][bicycle.coordinateY] != PositionOccupation.EMPTY);
 
-        mapa[coordinateX][bicycle.coordinateY()] = PositionOccupation.CAR;
+        mapa[bicycle.coordinateX][bicycle.coordinateY] = PositionOccupation.BICYCLE;
         return false;
     }
 
     @Override
-    public boolean settleCar(Car car) {
-        int coordinateX;
+    public boolean settleCar(Car car, PositionOccupation[][] mapa) {
         do {
 
-            coordinateX = car.coordinateX();
+          car.coordinateX = car.coordinateX();
+          car.coordinateY(car.coordinateX);
+        } while (mapa[car.coordinateX][car.coordinateY] != PositionOccupation.EMPTY);
 
-        } while (mapa[coordinateX][car.coordinateY()] != PositionOccupation.EMPTY);
-
-        mapa[coordinateX][car.coordinateY()] = PositionOccupation.CAR;
+        mapa[car.coordinateX][car.coordinateY] = PositionOccupation.CAR;
         return false;
     }
 
     @Override
-    public boolean settleCop(Cop cop) {
-        int coordinateX;
-        int coordinateY;
+    public boolean settleCop(Cop cop,  PositionOccupation[][] mapa) {
         do {
 
-            coordinateX = cop.coordinateX();
-            coordinateY = cop.coordinateY();
+            cop.coordinateX();
+            cop.coordinateY();
 
-        } while (mapa[coordinateX][coordinateY] != PositionOccupation.EMPTY);
-        mapa[coordinateX][coordinateY] = PositionOccupation.COP;
+        } while (mapa[cop.coordinateX][cop.coordinateY] != PositionOccupation.EMPTY);
+        mapa[cop.coordinateX][cop.coordinateY] = PositionOccupation.COP;
 
         return false;
     }
 
     @Override
-    public boolean settleTrafficLight(TrafficLights trafficLights) {
+    public boolean settleTrafficLight(TrafficLights trafficLights, PositionOccupation[][] mapa) {
 
         if (trafficLights.light == true)
             mapa[trafficLights.coordinateX][trafficLights.coordinateY] = PositionOccupation.GREEN;
