@@ -1,5 +1,7 @@
 package symulacja.participants.pedestrian;
 
+import symulacja.mapa.MapSimple;
+
 import java.util.Random;
 
 public class Human extends APedestrian {
@@ -8,33 +10,44 @@ public class Human extends APedestrian {
     }
 
     @Override
-    public void crossing(int firstCoordinateY,int coordinateY, int coordinateX) {
+    public void crossing(int firstCoordinateY, int coordinateY, int coordinateX, MapSimple position) {
     }
 
 
+//    public int coordinateX() {
+//      //  Random random = new Random();
+////        while (coordinateX != 2 && coordinateX != 8 && coordinateX != 11 && coordinateX != 12 && coordinateX != 13 && coordinateX != 18
+////                && coordinateX != 19 && coordinateX != 20 && coordinateX != 25 && coordinateX != 30) {
+////            coordinateX = random.nextInt() % 32;
+////        }
+//        return coordinateX;
+//    }
+
+//    public int coordinateY() {
+//
+//        return coordinateY;
+//    }
+
+
+    @Override
     public int coordinateX() {
-        int x = 0;
-        Random random = new Random();
-        while (x != 2 && x != 8 && x != 11 && x != 12 && x != 13 && x != 18 && x != 19 && x != 20 && x != 25 && x != 30) {
-            x = random.nextInt() % 32;
-        }
-        return x;
+        return super.coordinateX();
     }
 
+    @Override
     public int coordinateY() {
-        int coordinateY = 1;
-        Random random = new Random();
-        while (coordinateY != 0 && coordinateY != 5) {
-            coordinateY = random.nextInt() % 6;
-        }
-        return coordinateY;
+        return super.coordinateY();
     }
 
     @Override
-    public void leftPavementCrossing(int coordinateY, int coordinateX) {
+    public void leftPavementCrossing(int coordinateY, int coordinateX, MapSimple position) {
     }
 
+
     @Override
-    public void rightPavementCrossing(int coordinateY, int coordinateX) {
+    public void rightPavementCrossing(int coordinateY, int coordinateX, MapSimple position) {
     }
+
+
 }
+
