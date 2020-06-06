@@ -1,13 +1,13 @@
 package symulacja.participants.vehicle;
 
+import symulacja.mapa.MapSimple;
 import symulacja.mapa.PositionOccupation;
 
-import java.util.Random;
 
 public class Car extends Vehicle {
 
-    public Car(int maxSpeed) {
-        super(maxSpeed);
+    public Car(int maxSpeed, int speed) {
+        super(maxSpeed, speed);
     }
 
     @Override
@@ -20,13 +20,9 @@ public class Car extends Vehicle {
         return super.coordinateY(coordinateX);
     }
 
-    private int speedSlowerCar;
-    private int speedSlowerBicycle;
+    //    private int speedSlowerCar;
+//    private int speedSlowerBicycle;
 
-    public int speed(int maxSpeed){
-        super.speed(maxSpeed);
-        return speed;
-    }
 
     @Override
     public void slowDown(int speed1, int speed2) {
@@ -34,59 +30,55 @@ public class Car extends Vehicle {
     }
 
     @Override
-    public PositionOccupation seeObstacle(int coordinateX, int coordinateY) {
-        return super.seeObstacle(coordinateX, coordinateY);
+    public PositionOccupation seeObstacle(int coordinateX, int coordinateY, MapSimple position) {
+        return super.seeObstacle(coordinateX, coordinateY, position);
     }
-
 
     public void accelerate(int speed, int maxSpeed) {
         super.accelerate(speed, maxSpeed);
     }
 
 
-    public void move(int speed, int coordinateX, int coordinateY) {
-        Map[coordinateX][coordinateY] = PositionOccupation.EMPTY;
-        if (coordinateY == 0) {
-            coordinateX += (speed / 10);
-            switch (seeObstacle(coordinateX, coordinateY)) {
-                case HUMAN:
-                case DOG:
-                case RED:
-                    slowDown(maxSpeed, 0);
-                    break;
-                case BICYCLE:
-                    slowDown(speed, speedSlowerBicycle);
-                    break;
-                case CAR:
-                    slowDown(speed, speedSlowerCar);
-                    break;
-                case COP:
-                    slowDown(maxSpeed, PERMISSIBLE_SPEED);
-                default:
-                    accelerate(speed, maxSpeed);
+    public void move(int speed, int coordinateX, int coordinateY, MapSimple position) {
 
-            }
+
+        position.mapa[coordinateX][coordinateY] = PositionOccupation.EMPTY;
+
+        if (coordinateY == 4) {
+            coordinateX += speed / 10;
+            if (coordinateX < 32) {
+                switch (seeObstacle(coordinateX, coordinateY, position)) {
+                    case HUMAN:
+                    case DOG:
+                    case RED:
+                        slowDown(maxSpeed, 0);
+                        break;
+                    case COP:
+                        slowDown(maxSpeed, PERMISSIBLE_SPEED);
+                        break;
+                    default:
+                        accelerate(speed, maxSpeed);
+                }
+                position.mapa[coordinateX][coordinateY] = PositionOccupation.BICYCLE;
+            } else System.gc();
         } else {
-            coordinateX -= (speed / 10);
-            switch (seeObstacle(coordinateX, coordinateY)) {
-                case HUMAN:
-                case DOG:
-                case RED:
-                    slowDown(maxSpeed, 0);
-                    break;
-                case COP:
-                    slowDown(maxSpeed, PERMISSIBLE_SPEED);
-                    break;
-                case BICYCLE:
-                    slowDown(speed, speedSlowerBicycle);
-                    break;
-                case CAR:
-                    slowDown(speed, speedSlowerCar);
-                    break;
-                default:
-                    accelerate(speed, maxSpeed);
-            }
+
+            coordinateY -= speed / 10;
+            if (coordinateY >= 0) {
+                switch (seeObstacle(coordinateX, coordinateY, position)) {
+                    case HUMAN:
+                    case DOG:
+                    case RED:
+                        slowDown(maxSpeed, 0);
+                        break;
+                    case CAR:
+                        slowDown(maxSpeed, PERMISSIBLE_SPEED);
+                        break;
+                    default:
+                        accelerate(speed, maxSpeed);
+                }
+                position.mapa[coordinateX][coordinateY] = PositionOccupation.BICYCLE;
+            } else System.gc();
         }
-        Map[coordinateX][coordinateY] = PositionOccupation.CAR;
     }
 }
