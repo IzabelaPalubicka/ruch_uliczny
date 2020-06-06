@@ -10,11 +10,11 @@ import symulacja.participants.vehicle.Car;
 public interface Mapa {
 
         public PositionOccupation[][] makeMap();
-        boolean settleHuman(Human human);
-        boolean settleDog(Dog dog);
-        boolean settleBicycle(Bicycle bicycle);
-        boolean settleCar(Car car);
-        boolean settleCop(Cop cop);
-        boolean TrafficLight(TrafficLights trafficLights);
+        boolean settleHuman(Human human, PositionOccupation[][] mapa);
+        boolean settleDog(Dog dog,  PositionOccupation[][] mapa);
+        boolean settleBicycle(Bicycle bicycle,  PositionOccupation[][] mapa);
+        boolean settleCar(Car car,  PositionOccupation[][] mapa);
+        boolean settleCop(Cop cop,  PositionOccupation[][] mapa);
+        boolean settleTrafficLight(TrafficLights trafficLights, PositionOccupation[][] mapa);
 
 }
