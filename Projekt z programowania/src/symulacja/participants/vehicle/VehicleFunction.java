@@ -1,5 +1,6 @@
 package symulacja.participants.vehicle;
 
+import symulacja.mapa.MapSimple;
 import symulacja.mapa.PositionOccupation;
 import symulacja.participants.RandomPositionOccupation;
 
@@ -10,11 +11,9 @@ public interface VehicleFunction extends RandomPositionOccupation {
 
     void slowDown(int speed, int safeSpeed);
 
-    PositionOccupation seeObstacle(int coordinateX, int coordinateY);
+    PositionOccupation seeObstacle(int coordinateX, int coordinateY, PositionOccupation[][] mapa);
 
-    public void move(int maxSpeed, int coordinateX, int coordinateY);
-    
-     public int speed(int maxSpeed);
+    void move(int maxSpeed, int coordinateX, int coordinateY, PositionOccupation[][] mapa);
+
 
 }
-
