@@ -60,7 +60,7 @@ public class Bicycle extends Vehicle {
         } else {
 
             coordinateX += (int)(speed / 10);
-            if(coordinateX <32 ) {
+            if(coordinateX <32) {
                 switch (seeObstacle(coordinateX, coordinateY, position)) {
                     case HUMAN:
                     case DOG:
@@ -77,7 +77,6 @@ public class Bicycle extends Vehicle {
             }
             else System.gc();
         }
-
 
     }
 
