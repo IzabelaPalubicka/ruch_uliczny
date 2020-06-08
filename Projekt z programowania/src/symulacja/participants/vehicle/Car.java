@@ -45,8 +45,8 @@ public class Car extends Vehicle {
         position.mapa[coordinateX][coordinateY] = PositionOccupation.EMPTY;
 
         if (coordinateY == 4) {
-            coordinateX += speed / 10;
-            if (coordinateX < 32) {
+            coordinateX -= speed / 10;
+            if (coordinateX >= 0) {
                 switch (seeObstacle(coordinateX, coordinateY, position)) {
                     case HUMAN:
                     case DOG:
@@ -63,8 +63,8 @@ public class Car extends Vehicle {
             } else System.gc();
         } else {
 
-            coordinateY -= speed / 10;
-            if (coordinateY >= 0) {
+            coordinateY += speed / 10;
+            if (coordinateY <32 0) {
                 switch (seeObstacle(coordinateX, coordinateY, position)) {
                     case HUMAN:
                     case DOG:
