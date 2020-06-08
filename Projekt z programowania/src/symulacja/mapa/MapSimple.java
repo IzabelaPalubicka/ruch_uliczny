@@ -40,6 +40,7 @@ public class MapSimple implements Mapa {
 
             human.coordinateX = human.coordinateX();
             human.coordinateY = human.coordinateY();
+            human.firstCoordinateY = human.coordinateY;
 
         } while (mapa[human.coordinateX][human.coordinateY] != PositionOccupation.EMPTY);
         mapa[human.coordinateX][human.coordinateY] = PositionOccupation.HUMAN;
@@ -52,6 +53,7 @@ public class MapSimple implements Mapa {
 
             dog.coordinateX = dog.coordinateX();
             dog.coordinateY = dog.coordinateY();
+            dog.firstCoordinateY = dog.coordinateY;
 
         } while (mapa[dog.coordinateX][dog.coordinateY] != PositionOccupation.EMPTY);
         mapa[dog.coordinateX][dog.coordinateY] = PositionOccupation.DOG;
