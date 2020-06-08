@@ -44,10 +44,10 @@ public abstract class Vehicle extends VehicleProperties implements VehicleFuncti
 
     public PositionOccupation seeObstacle(int coordinateX, int coordinateY, MapSimple position) {
         if (coordinateX == 1) {
-            for (int i = 1; i == TIME_REACTION; i++)
+            for (int i = 1; i <= TIME_REACTION; i++)
                 for (int j = 0; j <= 4; j++) {
-                    if (position.mapa[coordinateX + i][coordinateY - j] != positionOccupation.EMPTY) {
-                        return position.mapa[coordinateX + i][coordinateY - j];
+                    if (position.mapa[coordinateX + i][coordinateY + j] != positionOccupation.EMPTY) {
+                        return position.mapa[coordinateX + i][coordinateY + j];
                     }
 //                    if (i == TIME_REACTION && j == 4) {
                     else
@@ -55,10 +55,10 @@ public abstract class Vehicle extends VehicleProperties implements VehicleFuncti
 
                 }
         } else {
-            for (int i = 1; i == TIME_REACTION; i++)
+            for (int i = 1; i <= TIME_REACTION; i++)
                 for (int j = 0; j <= 4; j++) {
-                    if (position.mapa[coordinateX - i][coordinateY + j] != positionOccupation.EMPTY) {
-                        return position.mapa[coordinateX - i][coordinateY + j];
+                    if (position.mapa[coordinateX - i][coordinateY - j] != positionOccupation.EMPTY) {
+                        return position.mapa[coordinateX - i][coordinateY - j];
                     }
 //                    if (i == TIME_REACTION && j == 4) {
                     else return positionOccupation.EMPTY;
