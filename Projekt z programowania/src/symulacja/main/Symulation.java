@@ -32,6 +32,7 @@ public class Symulation {
 
     public static void main(String[] args) throws InterruptedException {
 
+        
         MapSimple mapa = new MapSimple();
         Konsola konsola = new Konsola();
         VehicleCreatorList vehicleCreator = new VehicleCreatorList(konsola.numberCar, konsola.numberBicycle);
@@ -60,15 +61,15 @@ public class Symulation {
             if (x == 1 && indexCar < konsola.numberCar) {
                 Car car = new Car(konsola.maxSpeedCar, konsola.safeSpeedCar);
                 carList.add(car);
-                carList.get(indexCar).coordinateX();
-                carList.get(indexCar).coordinateY();
+                //carList.get(indexCar).coordinateX();
+               // carList.get(indexCar).coordinateY();
                 indexCar++;
             }
             if (x == 0 && indexBicycle < konsola.numberBicycle) {
                 Bicycle bicycle = new Bicycle(konsola.maxSpeedBicycle, konsola.safeSpeedBicycle);
                 bicycleList.add(bicycle);
-                bicycleList.get(indexBicycle).coordinateX();
-                bicycleList.get(indexBicycle).coordinateY();
+                //bicycleList.get(indexBicycle).coordinateX();
+               // bicycleList.get(indexBicycle).coordinateY();
                 indexBicycle++;
             }
             if (x == 1 && indexHuman < konsola.numberHuman) {
@@ -85,35 +86,35 @@ public class Symulation {
             for (int z = 0; ; z++) {
 
                 if (z < konsola.numberBicycle) {
-                    bicycleList.get(z).move(konsola.maxSpeedBicycle, bicycleList.get(z).coordinateX, bicycleList.get(z).coordinateY);
-                    System.out.println("Rower nr" + (z + 1) + "znajduje się na mapie na pozycji x" + bicycleList.get(z).coordinateX + " i pozycji y" + bicycleList.get(z).coordinateY);
+                    bicycleList.get(z).move(konsola.maxSpeedBicycle, bicycleList.get(z).coordinateX, bicycleList.get(z).coordinateY, mapa);
+                    System.out.println("ROWER nr " + (z + 1) + " znajduje się na mapie na pozycji x = " + bicycleList.get(z).coordinateX + " i pozycji y = " + bicycleList.get(z).coordinateY);
                 }
 
                 if (z < konsola.numberCar) {
-                    carList.get(z).move(konsola.maxSpeedBicycle, carList.get(z).coordinateX, carList.get(z).coordinateY);
-                    System.out.println("Auto nr" + (z + 1) + "znajduje się na mapie na pozycji x" + carList.get(z).coordinateX +
-                            "i pozycji y" + carList.get(z).coordinateY);
+                    carList.get(z).move(konsola.maxSpeedBicycle, carList.get(z).coordinateX, carList.get(z).coordinateY,mapa);
+                    System.out.println("AUTO nr " + (z + 1) + " znajduje się na mapie na pozycji x = " + carList.get(z).coordinateX +
+                            " i pozycji y = " + carList.get(z).coordinateY);
                 }
                 if (z < konsola.numberDog) {
                     dogList.get(z).crossing(humanList.get(z).coordinateY, humanList.get(z).coordinateY, humanList.get(z).coordinateX);
-                    System.out.println("Pies nr " + (z + 1) + " znajduje sie wlasnie w pozycji" +
-                            dogList.get(z).coordinateX + "x i " + dogList.get(z).coordinateY + "y");
+                    System.out.println("PIES nr " + (z + 1) + " znajduje sie właśnie na pozycji" +
+                            dogList.get(z).coordinateX + " x i " + dogList.get(z).coordinateY + " y");
                 }
                 if (z < konsola.numberHuman) {
                     humanList.get(z).crossing(humanList.get(z).coordinateY, humanList.get(z).coordinateY, humanList.get(z).coordinateX);
-                    System.out.println("Przechodzien nr jest  w tej chwili w puncie" + humanList.get(z).coordinateX + "i" + humanList.get(z).coordinateY);
+                    System.out.println("PIESZY nr "+(z+1)+" jest  w tej chwili w puncie " + humanList.get(z).coordinateX + " x i " + humanList.get(z).coordinateY+"y");
                 }
 
                 for (int y = 0; y != indexBicycle; y++) {
                     for (int w = 0; w != indexBicycle; w++) {
                         if ((bicycleList.get(y).coordinateX == carList.get(w).coordinateX && bicycleList.get(y).coordinateY == carList.get(w).coordinateY) ||
                                 (carList.get(y).coordinateX == carList.get(konsola.numberCar - y).coordinateX && carList.get(y).coordinateY == carList.get(konsola.numberCar - y).coordinateX)) {
-                            System.out.println("NASTĄPILA STŁUCZKA! DROGA NIE JEST BEZPIECZNA");
+                            System.out.println("NASTĄPIŁA STŁUCZKA! DROGA NIE JEST BEZPIECZNA");
                             System.exit(0);
                         }
                         if ((carList.get(y).coordinateX == humanList.get(y).coordinateX && carList.get(y).coordinateY == humanList.get(y).coordinateY) ||
                                 (carList.get(y).coordinateX == dogList.get(y).coordinateX && carList.get(y).coordinateY == dogList.get(y).coordinateY)) {
-                            System.out.println("MIAL MIEJSCE WYPADEK! DROGA NIE JEST BEZPIECZNA");
+                            System.out.println("MIAŁ MIEJSCE WYPADEK! DROGA NIE JEST BEZPIECZNA");
                             System.exit(0);
                         }
                     }
