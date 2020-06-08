@@ -50,7 +50,7 @@ public abstract class APedestrian implements Pedestrian {
     }
 
 
-    @Override
+  @Override
     public int coordinateX() {
         Random random = new Random();
         do {
@@ -67,5 +67,6 @@ public abstract class APedestrian implements Pedestrian {
         }while (coordinateY != 0 && coordinateY != 5);
         return coordinateY;
     }
+
 
 }
