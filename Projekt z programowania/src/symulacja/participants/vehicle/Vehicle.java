@@ -13,7 +13,7 @@ public abstract class Vehicle extends VehicleProperties implements VehicleFuncti
     }
 
 
-    public int coordinateX() {
+public int coordinateX() {
         Random random = new Random();
         do {
             coordinateX = random.nextInt() % 32;
