@@ -108,7 +108,7 @@ public class Symulation {
                     System.out.println("AUTO nr " + (w + 1) + " znajduje się na mapie na pozycji x = " + carList.get(w).coordinateX +
                             " i pozycji y = " + carList.get(w).coordinateY);
                     if (cop.speedingPenalty(carList.get(w).speed, carList.get(w).coordinateX, cop.coordinateX)) {
-                        ++mandat;
+                        mandat++;
                     }
                     w++;
 
@@ -119,7 +119,7 @@ public class Symulation {
                     System.out.println("ROWER nr " + (z + 1) + " znajduje się na mapie na pozycji x = " +
                             bicycleList.get(z).coordinateX + " i pozycji y = " + bicycleList.get(z).coordinateY);
                     if (cop.speedingPenalty(bicycleList.get(z).speed, bicycleList.get(z).coordinateX, cop.coordinateX)) {
-                        ++mandat;
+                        mandat++;
                     }
                     z++;
                 }
