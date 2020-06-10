@@ -44,6 +44,11 @@ public class Symulation {
         bicycleList = vehicleCreator.creatorBicycles(position, konsola.maxSpeedBicycle, konsola.safeSpeedBicycle);
         humanList = pedestrianCreator.creatorHuman();
         dogList = pedestrianCreator.creatorDogs();
+        
+        TrafficLights traffic_light1 = new TrafficLights(10, 15, 0, true);
+        TrafficLights traffic_light2 = new TrafficLights(10, 19, 5, false);
+        position.settleTrafficLight(traffic_light1, position.mapa);
+        position.settleTrafficLight(traffic_light2, position.mapa);
 
         int indexBicycle = 0;
         int indexCar = 0;
