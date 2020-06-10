@@ -9,8 +9,6 @@ public class Dog extends APedestrian {
     public Dog() {
     }
 
-
-
     @Override
     public int coordinateX() {
         return super.coordinateX();
@@ -21,19 +19,13 @@ public class Dog extends APedestrian {
         return super.coordinateY();
     }
 
-    @Override
-    public void crossing(int firstCoordinateY, int coordinateY, int coordinateX, MapSimple position) {
-        super.crossing(firstCoordinateY, coordinateY, coordinateX, position);
+@Override
+    public int crossing(int firstCoordinateY, int coordinateY, int coordinateX, PositionOccupation[][] mapa) {
+        if (firstCoordinateY == 0) {
+            coordinateY = coordinateY + 1;
+        } else if (firstCoordinateY == 5) {
+            coordinateY = coordinateY - 1;
+        }
+        return coordinateY;
     }
-
-    @Override
-    public void leftPavementCrossing(int coordinateY, int coordinateX, MapSimple position) {
-    }
-
-
-    @Override
-    public void rightPavementCrossing(int coordinateY, int coordinateX, MapSimple position) {
-    }
-
-
 }
