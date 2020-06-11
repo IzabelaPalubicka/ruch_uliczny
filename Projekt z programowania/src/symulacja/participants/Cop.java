@@ -3,19 +3,19 @@ package symulacja.participants;
 import java.util.Random;
 
 public class Cop implements RandomPositionOccupation {
-    boolean fine = false;
-    int coordinateX;
-    int coordinateY;
+    public boolean fine;
+    public int coordinateX;
+    public int coordinateY;
 
-    public Cop(boolean fine) {
+    public Cop() {
 
-        this.fine = fine;
+        this.fine = false;
         this.coordinateX = coordinateX();
         this.coordinateY = coordinateY();
 
     }
 
-    boolean speedingPenalty(int speed, int vehicleCoordinateX, int copCoordinateX) {
+    public boolean speedingPenalty(int speed, int vehicleCoordinateX, int copCoordinateX) {
 
         if (copCoordinateX == vehicleCoordinateX) {
             if (speed > 50) fine = true;
