@@ -21,7 +21,7 @@ public abstract class Vehicle extends VehicleProperties implements VehicleFuncti
         return coordinateX;
     }
 
-    public int coordinateY(int coordinateX) {
+    public int coordinateY(int coordinateX){
         if (coordinateX == 0) {
             coordinateY = 1;
         } else {
@@ -43,7 +43,7 @@ public abstract class Vehicle extends VehicleProperties implements VehicleFuncti
     }
 
     public PositionOccupation seeObstacle(int coordinateX, int coordinateY, MapSimple position) {
-        if (coordinateX == 1) {
+        if (coordinateY == 1) {
             for (int i = 1; i <= TIME_REACTION; i++)
                 for (int j = 0; j <= 4; j++) {
                     if (position.mapa[coordinateX + i][coordinateY + j] != positionOccupation.EMPTY) {
@@ -69,9 +69,11 @@ public abstract class Vehicle extends VehicleProperties implements VehicleFuncti
 
 
 
+    public int move(int maxSpeed, int coordinateX, int coordinateY, MapSimple position) {
+    return coordinateX; }
 
-    @Override
-    public void move(int maxSpeed, int coordinateX, int coordinateY, MapSimple position) {
+    public int speed(int n,  int speed,int coordinateX, int coordinateY, MapSimple position){
+        return speed;
     }
 
 
