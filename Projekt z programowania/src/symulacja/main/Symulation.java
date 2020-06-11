@@ -2,21 +2,18 @@ package symulacja.main;
 
 import symulacja.mapa.MapSimple;
 import symulacja.mapa.Mapa;
-import symulacja.mapa.creator.MapaCreator;
-import symulacja.mapa.creator.PedestrianCreator;
 import symulacja.mapa.creator.PedestrianCreatorList;
 import symulacja.mapa.creator.VehicleCreatorList;
-import symulacja.participants.pedestrian.Pedestrian;
+import symulacja.participants.TrafficLights;
 import symulacja.participants.vehicle.*;
 import symulacja.participants.pedestrian.Human;
 import symulacja.participants.pedestrian.Dog;
-import symulacja.participants.RandomPositionOccupation;
 import symulacja.participants.Cop;
 
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
+/**Jest to glowna klasa zawierajaca metode main.*/
 public class Symulation {
 
     Konsola konsola;
@@ -31,7 +28,7 @@ public class Symulation {
         this.vehicleCreator = vehicleCreator;
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args)  {
 
         MapSimple mapa = new MapSimple();
         Konsola konsola = new Konsola();
@@ -49,6 +46,11 @@ public class Symulation {
         humanList = pedestrianCreator.creatorHuman();
         dogList = pedestrianCreator.creatorDogs();
 
+        TrafficLights traffic_light1 = new TrafficLights(15, 1, true);
+        TrafficLights traffic_light2 = new TrafficLights(19, 4, false);
+        mapa.settleTrafficLight(traffic_light1, mapa.mapa);
+        mapa.settleTrafficLight(traffic_light2, mapa.mapa);
+
         Cop cop = new Cop();
 
         int indexBicycle = 0;
@@ -59,6 +61,8 @@ public class Symulation {
         int mandat = 0;
 
         for (int i = 0; (indexCar + indexBicycle) <= (konsola.numberCar + konsola.numberBicycle); i++) {
+            traffic_light1.changeColour(traffic_light1.coordinateX,traffic_light1.coordinateY, mapa, traffic_light1.light);
+            traffic_light2.changeColour(traffic_light2.coordinateX,traffic_light2.coordinateY, mapa, traffic_light2.light);
             int x;
             Random random = new Random();
             x = random.nextInt() % 2;
@@ -158,14 +162,14 @@ public class Symulation {
                                     bicycleList.get(m).coordinateY == carList.get(y).coordinateY) ||
                                     (carList.get(y).coordinateX == carList.get(indexCar - y).coordinateX &&
                                             carList.get(y).coordinateY == carList.get(indexCar - y).coordinateX)) {
-                                System.out.println("NASTĄPIŁA STŁUCZKA! DROGA NIE JEST BEZPIECZNA");
+                                System.out.println("NASTAPILA STLUCZKA! DROGA NIE JEST BEZPIECZNA");
                                 System.exit(0);
                             }
                         }
                         for (int n = 0; n != indexHuman; n++) {
                             if ((carList.get(y).coordinateX == humanList.get(n).coordinateX &&
                                     carList.get(y).coordinateY == humanList.get(n).coordinateY)) {
-                                System.out.println("MIAŁ MIEJSCE WYPADEK! DROGA NIE JEST BEZPIECZNA");
+                                System.out.println("MIAL MIEJSCE WYPADEK! DROGA NIE JEST BEZPIECZNA");
                                 System.exit(0);
                             }
                         }

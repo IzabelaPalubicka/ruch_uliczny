@@ -3,7 +3,7 @@ package symulacja.participants.vehicle;
 import symulacja.mapa.MapSimple;
 import symulacja.mapa.PositionOccupation;
 
-
+/**Klasa ta rozni sie od klasy Car tym ze obiekt Cop nie wplywa na predkosc jej obiektu*/
 public class Bicycle extends Vehicle {
 
     public Bicycle(int maxSpeed, int speed) {
@@ -44,7 +44,7 @@ public class Bicycle extends Vehicle {
         return super.seeObstacle(coordinateX, coordinateY, position);
     }
 
-    public int speed(int n,  int speed,int coordinateX, int coordinateY, MapSimple position) {
+    public int speed(int n, int speed, int coordinateX, int coordinateY, MapSimple position) {
         if (coordinateY == 4) {
             if (coordinateX <= 0) {
                 position.mapa[0][4] = PositionOccupation.EMPTY;
@@ -87,7 +87,7 @@ public class Bicycle extends Vehicle {
         return speed;
     }
 
-    public int move(int speed, int coordinateX, int coordinateY, MapSimple position){
+    public int move(int speed, int coordinateX, int coordinateY, MapSimple position) {
 
         position.mapa[coordinateX][coordinateY] = PositionOccupation.EMPTY;
 
@@ -95,10 +95,10 @@ public class Bicycle extends Vehicle {
             if (coordinateX > 0) {
                 position.mapa[coordinateX][coordinateY] = PositionOccupation.EMPTY;
                 coordinateX -= (int) (speed / 10);
-                if(coordinateX<=0){
-                    coordinateX=0;
+                if (coordinateX <= 0) {
+                    coordinateX = 0;
                     position.mapa[0][4] = PositionOccupation.EMPTY;
-                }else{
+                } else {
                     position.mapa[coordinateX][coordinateY] = PositionOccupation.BICYCLE;
                 }
             }
@@ -106,13 +106,14 @@ public class Bicycle extends Vehicle {
             if (coordinateX < 31) {
                 position.mapa[coordinateX][coordinateY] = PositionOccupation.EMPTY;
                 coordinateX += (int) (speed / 10);
-                if(coordinateX>=31){
-                    coordinateX=31;
+                if (coordinateX >= 31) {
+                    coordinateX = 31;
                     position.mapa[31][1] = PositionOccupation.EMPTY;
-                }else {
+                } else {
                     position.mapa[coordinateX][coordinateY] = PositionOccupation.BICYCLE;
                 }
             }
         }
         return coordinateX;
     }
+}

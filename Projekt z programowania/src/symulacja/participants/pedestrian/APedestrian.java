@@ -5,11 +5,13 @@ import symulacja.mapa.PositionOccupation;
 
 import java.util.Random;
 
-
+/**Jest to klasa abstrakycjna, po ktorej dziedziczy klasa Human i Dog, zawiera takie metody jak losowanie wspolrzednych i zmiane pozycji
+ * (zmiane wspolrzednej Y), klasy po niej dziedziczace sa ruchomo przeszkoda dla pojazdow*/
 public abstract class APedestrian implements Pedestrian {
 
     public int coordinateX;
     public int coordinateY;
+    /**zmienna firstCoordinateY ulatwia okreslenie czy wartosci wspolrzednej Y powinny rosnąc czy malec*/
     public int firstCoordinateY;
     protected PositionOccupation positionOccupation;
 

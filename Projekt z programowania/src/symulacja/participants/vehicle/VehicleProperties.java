@@ -1,9 +1,11 @@
 package symulacja.participants.vehicle;
 
-        import symulacja.mapa.PositionOccupation;
-        import symulacja.participants.RandomPositionOccupation;
+import symulacja.mapa.PositionOccupation;
+import symulacja.participants.RandomPositionOccupation;
 
-
+/**
+ * Klasa ta zawiera wszystkie parametry klasy abstrakcyjnej Vehicle i klas Car i Bicycle
+ */
 public class VehicleProperties implements RandomPositionOccupation {
 
     public int maxSpeed;

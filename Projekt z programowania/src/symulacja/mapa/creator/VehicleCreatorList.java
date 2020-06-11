@@ -8,6 +8,7 @@ import symulacja.participants.vehicle.Car;
 import java.util.LinkedList;
 import java.util.List;
 
+/**Klasa ta dpowiedzialna jest za powstanie tablicy obiektow klas Car i Bicycle*/
 public class VehicleCreatorList implements VehicleCreator{
 
     protected int amountCar;

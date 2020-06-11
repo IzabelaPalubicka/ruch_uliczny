@@ -8,6 +8,7 @@ import symulacja.participants.pedestrian.Pedestrian;
 import java.util.LinkedList;
 import java.util.List;
 
+/**Klasa ta dpowiedzialna jest za powstanie tablicy obiektow klas Dog i Human*/
 public class PedestrianCreatorList implements PedestrianCreator {
 
     protected int amountHuman;

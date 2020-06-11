@@ -2,7 +2,6 @@ package symulacja.participants.pedestrian;
 
 import symulacja.participants.RandomPositionOccupation;
 
-import java.util.List;
 
 public interface Pedestrian extends RandomPositionOccupation {
 

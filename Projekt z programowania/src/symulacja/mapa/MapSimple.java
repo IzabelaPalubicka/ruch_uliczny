@@ -7,8 +7,9 @@ import symulacja.participants.pedestrian.Human;
 import symulacja.participants.vehicle.Bicycle;
 import symulacja.participants.vehicle.Car;
 
-//import java.util.Random;
 
+/**Klasa ta zawiera informacje o aktualnej pozycji obiektow, oznacza je za pomoca enumow. Dzieki jej metodom obiekty sa umieszczane na mapie
+ * w taki sposob, aby ich pierwsza pozycja zajmowala puste miejsce, nie doprowadzajac do kolizji juz na samymm poczatku*/
 public class MapSimple implements Mapa {
 
     public final int HIGH = 32;

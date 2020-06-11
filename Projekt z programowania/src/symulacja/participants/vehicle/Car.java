@@ -3,7 +3,8 @@ package symulacja.participants.vehicle;
 import symulacja.mapa.MapSimple;
 import symulacja.mapa.PositionOccupation;
 
-
+/**Klasa ta posiada metode, ktora powoduje poruszanie sie wzdluz wspolrzednej X, jezeli przed obiektem znajduja sie jakies przeszkody typu Human, Dog,
+ * Traffic_Light, Cop - zwalnia, jezeli nie to przyspiesza do maksymalnej predkosci*/
 public class Car extends Vehicle {
 
     public Car(int maxSpeed, int speed) {

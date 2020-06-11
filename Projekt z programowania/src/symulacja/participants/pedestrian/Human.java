@@ -1,8 +1,5 @@
 package symulacja.participants.pedestrian;
 
-import symulacja.mapa.MapSimple;
-
-import java.util.Random;
 
 public class Human extends APedestrian {
 

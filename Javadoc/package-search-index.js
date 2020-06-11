@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"symulacja.main"},{"l":"symulacja.mapa"},{"l":"symulacja.mapa.creator"},{"l":"symulacja.participants"},{"l":"symulacja.participants.pedestrian"},{"l":"symulacja.participants.vehicle"}]

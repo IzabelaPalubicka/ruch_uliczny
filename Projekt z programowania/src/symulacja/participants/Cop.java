@@ -1,7 +1,8 @@
-ackage symulacja.participants;
+package symulacja.participants;
 
 import java.util.Random;
 
+/**Klasa ta zawiera metode odpowiedzialna za mierzenie predkosci i wlepianie mandatow*/
 public class Cop implements RandomPositionOccupation {
     public boolean fine;
     public int coordinateX;

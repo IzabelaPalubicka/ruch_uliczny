@@ -5,6 +5,8 @@ import symulacja.mapa.PositionOccupation;
 
 import java.util.Random;
 
+/**Klasa abstrakcyjna, po ktorej dziedzicza klasy Car i Bicycle, zawiera metody do losowania pierwszych wspolrzednych X i Y.
+ * Posiada metode ktora okresla czy na drodze wystepuje jakas przeszkoda, a takze metody odpowiedzialne za zmniejszanie lub zwiekszanie predkosci.*/
 public abstract class Vehicle extends VehicleProperties implements VehicleFunction {
 
 

@@ -2,6 +2,7 @@ package symulacja.main;
 
 import java.util.Scanner;
 
+/**Klasa ta odpowiada za wprowadzenie do symulacji parametrow takich jak predkosci poruszajacych sie obiektow i ich ilosc */
 public class Konsola implements Consola {
 
     public int maxSpeedCar;
