@@ -2,16 +2,20 @@ package symulacja.main;
 
 import symulacja.mapa.MapSimple;
 import symulacja.mapa.Mapa;
+import symulacja.mapa.creator.MapaCreator;
+import symulacja.mapa.creator.PedestrianCreator;
 import symulacja.mapa.creator.PedestrianCreatorList;
 import symulacja.mapa.creator.VehicleCreatorList;
-
+import symulacja.participants.pedestrian.Pedestrian;
 import symulacja.participants.vehicle.*;
 import symulacja.participants.pedestrian.Human;
 import symulacja.participants.pedestrian.Dog;
+import symulacja.participants.RandomPositionOccupation;
+import symulacja.participants.Cop;
 
 import java.util.List;
 import java.util.Random;
-
+import java.util.Scanner;
 
 public class Symulation {
 
@@ -29,32 +33,30 @@ public class Symulation {
 
     public static void main(String[] args) throws InterruptedException {
 
-        MapSimple position = new MapSimple();
+        MapSimple mapa = new MapSimple();
         Konsola konsola = new Konsola();
         VehicleCreatorList vehicleCreator = new VehicleCreatorList(konsola.numberCar, konsola.numberBicycle);
         PedestrianCreatorList pedestrianCreator = new PedestrianCreatorList(konsola.numberHuman, konsola.numberDog);
-        Symulation symulation = new Symulation(position, pedestrianCreator, vehicleCreator);
+        Symulation symulation = new Symulation(mapa, pedestrianCreator, vehicleCreator);
 
         List<Car> carList;
         List<Bicycle> bicycleList;
         List<Human> humanList;
         List<Dog> dogList;
 
-        carList = vehicleCreator.creatorCars(position, konsola.maxSpeedCar, konsola.safeSpeedCar);
-        bicycleList = vehicleCreator.creatorBicycles(position, konsola.maxSpeedBicycle, konsola.safeSpeedBicycle);
+        carList = vehicleCreator.creatorCars(mapa, konsola.maxSpeedCar, konsola.safeSpeedCar);
+        bicycleList = vehicleCreator.creatorBicycles(mapa, konsola.maxSpeedBicycle, konsola.safeSpeedBicycle);
         humanList = pedestrianCreator.creatorHuman();
         dogList = pedestrianCreator.creatorDogs();
-        
-        TrafficLights traffic_light1 = new TrafficLights(10, 15, 0, true);
-        TrafficLights traffic_light2 = new TrafficLights(10, 19, 5, false);
-        position.settleTrafficLight(traffic_light1, position.mapa);
-        position.settleTrafficLight(traffic_light2, position.mapa);
+
+        Cop cop = new Cop();
 
         int indexBicycle = 0;
         int indexCar = 0;
         int indexHuman = 0;
         int indexDog = 0;
         int[] kolej = new int[1000];
+        int mandat = 0;
 
         for (int i = 0; (indexCar + indexBicycle) <= (konsola.numberCar + konsola.numberBicycle); i++) {
             int x;
@@ -99,40 +101,82 @@ public class Symulation {
             int t = 0;
             int s = 0;
 
+
             for (int j = 0; j <= i; j++) {
                 if (kolej[j] == 1 && w < indexCar) {
-                    carList.get(w).coordinateX = carList.get(w).move(konsola.maxSpeedCar, carList.get(w).coordinateX,
-                            carList.get(w).coordinateY, position.mapa);
-                    System.out.println("AUTO nr " + (w + 1) + " znajduje się na mapie na pozycji x = " + carList.get(w).coordinateX +
-                            " i pozycji y = " + carList.get(w).coordinateY);
+                    carList.get(w).speed = carList.get(w).speed(w, konsola.maxSpeedCar, carList.get(w).coordinateX,
+                            carList.get(w).coordinateY, mapa);
+                    if (carList.get(w).speed != 0) {
+                        carList.get(w).coordinateX = carList.get(w).move(konsola.maxSpeedCar, carList.get(w).coordinateX,
+                                carList.get(w).coordinateY, mapa);
+                        System.out.println("AUTO nr " + (w + 1) + " znajduje się na mapie na pozycji x = " + carList.get(w).coordinateX +
+                                " i pozycji y = " + carList.get(w).coordinateY);
+                    }
+                    if (cop.speedingPenalty(carList.get(w).speed, carList.get(w).coordinateX, cop.coordinateX)) {
+                        mandat++;
+                    }
                     w++;
-
                 }
                 if (kolej[j] == 0 && z < indexBicycle) {
-                    bicycleList.get(z).coordinateX = bicycleList.get(z).move(konsola.maxSpeedBicycle,
-                            bicycleList.get(z).coordinateX, bicycleList.get(z).coordinateY, position.mapa);
-                    System.out.println("ROWER nr " + (z + 1) + " znajduje się na mapie na pozycji x = " +
-                            bicycleList.get(z).coordinateX + " i pozycji y = " + bicycleList.get(z).coordinateY);
+                    bicycleList.get(z).speed = bicycleList.get(z).speed(z, konsola.maxSpeedBicycle,
+                            bicycleList.get(z).coordinateX, bicycleList.get(z).coordinateY, mapa);
+                    if (bicycleList.get(z).speed != 0) {
+                        bicycleList.get(z).coordinateX = bicycleList.get(z).move(konsola.maxSpeedBicycle,
+                                bicycleList.get(z).coordinateX, bicycleList.get(z).coordinateY, mapa);
+                        System.out.println("ROWER nr " + (z + 1) + " znajduje się na mapie na pozycji x = " +
+                                bicycleList.get(z).coordinateX + " i pozycji y = " + bicycleList.get(z).coordinateY);
+                    }
                     z++;
                 }
                 if (kolej[j] == 1 && t < indexHuman) {
-                    humanList.get(t).coordinateY = humanList.get(t).crossing(humanList.get(t).firstCoordinateY,
-                            humanList.get(t).coordinateY, humanList.get(t).coordinateX, position.mapa);
-                    System.out.println("PIESZY nr " + (t + 1) + " jest  w tej chwili w puncie " + humanList.get(t).coordinateX +
-                            " x i " + humanList.get(t).coordinateY + "y");
+                    humanList.get(t).coordinateY = humanList.get(t).crossing(t, humanList.get(t).firstCoordinateY,
+                            humanList.get(t).coordinateY, humanList.get(t).coordinateX, mapa);
+                    if ((humanList.get(t).firstCoordinateY== 5 &&humanList.get(t).coordinateY==0) ||
+                            (humanList.get(t).firstCoordinateY ==0 && humanList.get(t).coordinateY==5)) {
+                        System.out.println("PIESZY nr " + (t + 1) + " wyszedł poza obręb mapy");
+                    } else {
+                        System.out.println("PIESZY nr " + (t + 1) + " jest  w tej chwili w puncie " + humanList.get(t).coordinateX +
+                                " x i " + humanList.get(t).coordinateY + "y");
+                    }
                     t++;
                 }
                 if (kolej[j] == 0 && s < indexDog) {
-                    dogList.get(s).coordinateY = dogList.get(s).crossing(dogList.get(s).firstCoordinateY,
-                            dogList.get(s).coordinateY, dogList.get(s).coordinateX, position.mapa);
-                    System.out.println("PIES nr " + (s + 1) + " znajduje sie właśnie na pozycji " +
-                            dogList.get(s).coordinateX + " x i " + dogList.get(s).coordinateY + " y");
-                    s++;
+                    dogList.get(s).coordinateY = dogList.get(s).crossing(s, dogList.get(s).firstCoordinateY,
+                            dogList.get(s).coordinateY, dogList.get(s).coordinateX, mapa);
+                    if ((dogList.get(s).firstCoordinateY== 5 &&dogList.get(s).coordinateY==0) ||
+                            (dogList.get(s).firstCoordinateY ==0 && dogList.get(s).coordinateY==5)) {
+                        System.out.println("PIES nr " + (s + 1) + " wyszedł poza obręb mapy");
+                    } else {
+                        System.out.println("PIES nr " + (s + 1) + " znajduje sie właśnie na pozycji " +
+                                dogList.get(s).coordinateX + " x i " + dogList.get(s).coordinateY + " y");
+                        s++;
+                    }
+
+                    for (int y = 0; y != indexCar; y++) {
+                        for (int m = 0; m != indexBicycle; m++) {
+                            if ((bicycleList.get(m).coordinateX == carList.get(y).coordinateX &&
+                                    bicycleList.get(m).coordinateY == carList.get(y).coordinateY) ||
+                                    (carList.get(y).coordinateX == carList.get(indexCar - y).coordinateX &&
+                                            carList.get(y).coordinateY == carList.get(indexCar - y).coordinateX)) {
+                                System.out.println("NASTĄPIŁA STŁUCZKA! DROGA NIE JEST BEZPIECZNA");
+                                System.exit(0);
+                            }
+                        }
+                        for (int n = 0; n != indexHuman; n++) {
+                            if ((carList.get(y).coordinateX == humanList.get(n).coordinateX &&
+                                    carList.get(y).coordinateY == humanList.get(n).coordinateY)) {
+                                System.out.println("MIAŁ MIEJSCE WYPADEK! DROGA NIE JEST BEZPIECZNA");
+                                System.exit(0);
+                            }
+                        }
+                        for (int o = 0; o != indexDog; o++) {
+                            if ((carList.get(y).coordinateX == dogList.get(o).coordinateX && carList.get(y).coordinateY == dogList.get(o).coordinateY));
+                        }
+                    }
                 }
 
             }
         }
+        System.out.println("Liczba mandatów wynosi " + (mandat));
     }
-
 }
-
