@@ -13,7 +13,8 @@ public interface VehicleFunction extends RandomPositionOccupation {
 
     PositionOccupation seeObstacle(int coordinateX, int coordinateY, PositionOccupation[][] mapa);
 
-    void move(int maxSpeed, int coordinateX, int coordinateY, PositionOccupation[][] mapa);
+    int move(int maxSpeed, int coordinateX, int coordinateY, PositionOccupation[][] mapa);
 
+    int speed(int n,  int speed,int coordinateX, int coordinateY, MapSimple position);
 
 }
