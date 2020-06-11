@@ -1,0 +1,35 @@
+package symulacja.main;
+
+import symulacja.participants.pedestrian.Dog;
+import symulacja.participants.pedestrian.Human;
+import symulacja.participants.vehicle.Bicycle;
+import symulacja.participants.vehicle.Car;
+
+import java.util.List;
+
+public class ParticipantsAccident implements Accident {
+
+
+    @Override
+    public void vehicleShunt(int y, int m, int indexBicycle, int indexCar, List<Bicycle> bicycleList, List<Car> carList) {
+
+        if ((bicycleList.get(m).coordinateX == carList.get(y).coordinateX && bicycleList.get(m).coordinateY
+                == carList.get(y).coordinateY) ||
+                (carList.get(y).coordinateX == carList.get(indexCar - y).coordinateX && carList.get(y).coordinateY
+                        == carList.get(indexCar - y).coordinateX)) {
+            System.out.println("NASTĄPIŁA STŁUCZKA! DROGA NIE JEST BEZPIECZNA");
+            System.exit(0);
+        }
+    }
+
+
+    @Override
+    public void pedestrianBlindsiding(int y, int n, int indexHuman, int indexDog, List<Human> humanList, List<Car> carList, List<Dog> dogList) {
+
+        if ((carList.get(y).coordinateX == humanList.get(n).coordinateX && carList.get(y).coordinateY == humanList.get(n).coordinateY) ||
+                (carList.get(y).coordinateX == dogList.get(n).coordinateX && carList.get(y).coordinateY == dogList.get(n).coordinateY)) {
+            System.out.println("MIAŁ MIEJSCE WYPADEK! DROGA NIE JEST BEZPIECZNA");
+            System.exit(0);
+        }
+    }
+}
