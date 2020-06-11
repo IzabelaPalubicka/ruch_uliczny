@@ -20,9 +20,15 @@ public class Car extends Vehicle {
         return super.coordinateY(coordinateX);
     }
 
-    //    private int speedSlowerCar;
-//    private int speedSlowerBicycle;
+    @Override
+    public PositionOccupation seeObstacle(int coordinateX, int coordinateY, PositionOccupation[][] mapa) {
+        return null;
+    }
 
+    @Override
+    public int move(int maxSpeed, int coordinateX, int coordinateY, PositionOccupation[][] mapa) {
+        return 0;
+    }
 
     @Override
     public void slowDown(int speed1, int speed2) {
@@ -39,13 +45,13 @@ public class Car extends Vehicle {
     }
 
 
-    public void move(int speed, int coordinateX, int coordinateY, MapSimple position) {
-
- position.mapa[coordinateX][coordinateY] = PositionOccupation.EMPTY;
-
+    public int speed(int n,  int speed,int coordinateX, int coordinateY, MapSimple position) {
         if (coordinateY == 4) {
-            coordinateX -= speed / 10;
-            if (coordinateX >= 0) {
+            if (coordinateX <= 0) {
+                position.mapa[0][4] = PositionOccupation.EMPTY;
+                speed = 0;
+                System.out.println("ROWER nr " + (n + 1) + "wyszedł poza obręb mapy");
+            } else {
                 switch (seeObstacle(coordinateX, coordinateY, position)) {
                     case HUMAN:
                     case DOG:
@@ -58,12 +64,13 @@ public class Car extends Vehicle {
                     default:
                         accelerate(speed, maxSpeed);
                 }
-                position.mapa[coordinateX][coordinateY] = PositionOccupation.BICYCLE;
-            } else System.gc();
+            }
         } else {
-
-            coordinateX += speed / 10;
-            if (coordinateX < 32 ) {
+            if (coordinateX >= 31) {
+                position.mapa[31][1] = PositionOccupation.EMPTY;
+                speed = 0;
+                System.out.println("ROWER nr " + (n + 1) + "wyszedł poza obręb mapy");
+            } else {
                 switch (seeObstacle(coordinateX, coordinateY, position)) {
                     case HUMAN:
                     case DOG:
@@ -76,8 +83,38 @@ public class Car extends Vehicle {
                     default:
                         accelerate(speed, maxSpeed);
                 }
-                position.mapa[coordinateX][coordinateY] = PositionOccupation.BICYCLE;
-            } else System.gc();
+            }
         }
+        return speed;
+    }
+
+    public int move(int speed, int coordinateX, int coordinateY, MapSimple position){
+
+        position.mapa[coordinateX][coordinateY] = PositionOccupation.EMPTY;
+
+        if (coordinateY == 4) {
+            if (coordinateX > 0) {
+                position.mapa[coordinateX][coordinateY] = PositionOccupation.EMPTY;
+                coordinateX -= (int) (speed / 10);
+                if(coordinateX<=0){
+                    coordinateX=0;
+                    position.mapa[0][4] = PositionOccupation.EMPTY;
+                }else{
+                    position.mapa[coordinateX][coordinateY] = PositionOccupation.BICYCLE;
+                }
+            }
+        } else {
+            if (coordinateX < 31) {
+                position.mapa[coordinateX][coordinateY] = PositionOccupation.EMPTY;
+                coordinateX += (int) (speed / 10);
+                if(coordinateX>=31){
+                    coordinateX=31;
+                    position.mapa[31][1] = PositionOccupation.EMPTY;
+                }else {
+                    position.mapa[coordinateX][coordinateY] = PositionOccupation.BICYCLE;
+                }
+            }
+        }
+        return coordinateX;
     }
 }
