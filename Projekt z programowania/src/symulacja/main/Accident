@@ -1,0 +1,16 @@
+package symulacja.main;
+
+import symulacja.participants.pedestrian.Dog;
+import symulacja.participants.pedestrian.Human;
+import symulacja.participants.vehicle.Bicycle;
+import symulacja.participants.vehicle.Car;
+
+import java.util.List;
+
+public interface Accident {
+
+    public void vehicleShunt(int y, int m, int indexBicycle, int indexCar, List<Bicycle> bicycleList, List<Car> carList);
+
+    public void pedestrianBlindsiding(int y, int n, int indexHuman, int indexDog, List<Human> humanList, List<Car> carList, List<Dog> dogList);
+
+}
