@@ -12,7 +12,6 @@ public class VehicleProperties implements RandomPositionOccupation {
     public final int TIME_REACTION = 10;
     public int coordinateX;
     public int coordinateY;
-    //  protected PositionOccupation[][] Map;
     protected PositionOccupation positionOccupation;
 
     public VehicleProperties(int maxSpeed, int speed) {
