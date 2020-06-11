@@ -1,0 +1,45 @@
+package symulacja.main;
+
+import symulacja.mapa.MapSimple;
+import symulacja.mapa.PositionOccupation;
+import symulacja.participants.Cop;
+import symulacja.participants.pedestrian.Dog;
+import symulacja.participants.pedestrian.Human;
+import symulacja.participants.vehicle.Bicycle;
+import symulacja.participants.vehicle.Car;
+
+import java.util.List;
+
+public class MovingParticipants implements Moving{
+
+    public void movingBicycles(int z, List<Bicycle> bicycleList, int maxSpeedBicycle, PositionOccupation[][] mapa) {
+        bicycleList.get(z).coordinateX = bicycleList.get(z).move(maxSpeedBicycle,
+                bicycleList.get(z).coordinateX, bicycleList.get(z).coordinateY, mapa);
+        System.out.println("ROWER nr " + (z + 1) + " znajduje się na mapie na pozycji x = " +
+                bicycleList.get(z).coordinateX + " i pozycji y = " + bicycleList.get(z).coordinateY);
+    }
+
+    public void movingCars(int w, List<Car> carList, int maxSpeedCar, PositionOccupation[][] mapa, Cop cop, int mandat) {
+        carList.get(w).coordinateX = carList.get(w).move(maxSpeedCar, carList.get(w).coordinateX,
+                carList.get(w).coordinateY, mapa);
+        System.out.println("AUTO nr " + (w + 1) + " znajduje się na mapie na pozycji x = " + carList.get(w).coordinateX +
+                " i pozycji y = " + carList.get(w).coordinateY);
+        if (cop.speedingPenalty(carList.get(w).speed, carList.get(w).coordinateX, cop.coordinateX)) {
+            ++mandat;
+        }
+    }
+
+    public void movingPeople(int t, List<Human> humanList, MapSimple position){
+        humanList.get(t).coordinateY = humanList.get(t).crossing(humanList.get(t).firstCoordinateY,
+                humanList.get(t).coordinateY, humanList.get(t).coordinateX, position);
+        System.out.println("PIESZY nr " + (t + 1) + " jest  w tej chwili w puncie " + humanList.get(t).coordinateX +
+                " x i " + humanList.get(t).coordinateY + "y");
+    }
+
+    public void movingDogs(int s, List<Dog> dogList, MapSimple position){
+        dogList.get(s).coordinateY = dogList.get(s).crossing(dogList.get(s).firstCoordinateY,
+                dogList.get(s).coordinateY, dogList.get(s).coordinateX, position);
+        System.out.println("PIES nr " + (s + 1) + " znajduje sie właśnie na pozycji " +
+                dogList.get(s).coordinateX + " x i " + dogList.get(s).coordinateY + " y");
+    }
+}
