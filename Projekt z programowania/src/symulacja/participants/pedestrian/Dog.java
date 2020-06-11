@@ -10,30 +10,21 @@ public class Dog extends APedestrian {
     }
 
 
-
     @Override
     public int coordinateX() {
-        return super.coordinateX();
+        super.coordinateX();
+        return coordinateX;
     }
 
     @Override
     public int coordinateY() {
-        return super.coordinateY();
+        super.coordinateY();
+        return coordinateY;
     }
 
     @Override
-    public void crossing(int firstCoordinateY, int coordinateY, int coordinateX, MapSimple position) {
-        super.crossing(firstCoordinateY, coordinateY, coordinateX, position);
+    public int crossing(int n, int firstCoordinateY, int coordinateY, int coordinateX) {
+        return 0;
     }
-
-    @Override
-    public void leftPavementCrossing(int coordinateY, int coordinateX, MapSimple position) {
-    }
-
-
-    @Override
-    public void rightPavementCrossing(int coordinateY, int coordinateX, MapSimple position) {
-    }
-
 
 }
