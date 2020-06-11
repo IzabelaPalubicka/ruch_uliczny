@@ -1,0 +1,18 @@
+package symulacja.main;
+
+import symulacja.mapa.MapSimple;
+import symulacja.mapa.PositionOccupation;
+import symulacja.participants.pedestrian.Dog;
+import symulacja.participants.pedestrian.Human;
+import symulacja.participants.vehicle.Bicycle;
+import symulacja.participants.vehicle.Car;
+
+import java.util.List;
+
+public interface SettleParticipants {
+
+    public void settleCarList(int x, int indexCar, int numberCar, MapSimple position, List<Car> carList);
+    public void settleBicycleList(int x, int indexBicycle, int numberBicycle, MapSimple position, List<Bicycle> bicycleList);
+    public void settleHumanList(int x, int indexHuman, int numberHuman, MapSimple position, List<Human> humanList);
+    public void settleDogList(int x, int indexDog, int numberDog, MapSimple position, List<Dog> dogList);
+}
