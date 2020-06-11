@@ -1,0 +1,55 @@
+package symulacja.main;
+
+import symulacja.mapa.MapSimple;
+import symulacja.participants.pedestrian.Dog;
+import symulacja.participants.pedestrian.Human;
+import symulacja.participants.vehicle.Bicycle;
+import symulacja.participants.vehicle.Car;
+
+import java.util.List;
+
+public class SettleEveryParticipants implements SettleParticipants{
+
+
+    @Override
+    public void settleCarList(int x, int indexCar, int numberCar, MapSimple position, List<Car> carList) {
+        if (x == 1 && indexCar < numberCar) {
+            position.settleCar(carList.get(indexCar), position.mapa);
+            System.out.println("AUTO nr " + (indexCar + 1) + " znajduje się na mapie na pozycji x = " + carList.get(indexCar).coordinateX +
+                    " i pozycji y = " + carList.get(indexCar).coordinateY);
+            indexCar++;
+        }
+    }
+
+    @Override
+    public void settleBicycleList(int x, int indexBicycle, int numberBicycle, MapSimple position, List<Bicycle> bicycleList) {
+        if (x == 0 && indexBicycle < numberBicycle) {
+            position.settleBicycle(bicycleList.get(indexBicycle), position.mapa);
+            System.out.println("ROWER nr " + (indexBicycle + 1) + " znajduje się na mapie na pozycji x = " +
+                    bicycleList.get(indexBicycle).coordinateX + " i pozycji y = " + bicycleList.get(indexBicycle).coordinateY);
+            indexBicycle++;
+        }
+
+    }
+
+    @Override
+    public void settleHumanList(int x, int indexHuman, int numberHuman, MapSimple position, List<Human> humanList) {
+        if (x == 1 && indexHuman < numberHuman) {
+            position.settleHuman(humanList.get(indexHuman), position.mapa);
+            System.out.println("PIESZY nr " + (indexHuman + 1) + " jest  w tej chwili w punkcie " + humanList.get(indexHuman).coordinateX +
+                    " x i " + humanList.get(indexHuman).coordinateY + "y");
+            indexHuman++;
+        }
+
+    }
+
+    @Override
+    public void settleDogList(int x, int indexDog, int numberDog, MapSimple position, List<Dog> dogList) {
+        if (x == 0 && indexDog < numberDog) {
+            position.settleDog(dogList.get(indexDog), position.mapa);
+            System.out.println("PIES nr " + (indexDog + 1) + " znajduje sie właśnie na pozycji " +
+                    dogList.get(indexDog).coordinateX + " x i " + dogList.get(indexDog).coordinateY + " y");
+            indexDog++;
+        }
+    }
+}
