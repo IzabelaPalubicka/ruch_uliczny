@@ -1,0 +1,18 @@
+package symulacja.main;
+
+import symulacja.mapa.MapSimple;
+import symulacja.mapa.PositionOccupation;
+import symulacja.participants.Cop;
+import symulacja.participants.pedestrian.Dog;
+import symulacja.participants.pedestrian.Human;
+import symulacja.participants.vehicle.Bicycle;
+import symulacja.participants.vehicle.Car;
+
+import java.util.List;
+
+public interface Moving {
+    public void movingBicycles(int z, List<Bicycle> bicycleList, int maxSpeedBicycle, PositionOccupation[][] mapa);
+    public void movingCars(int w, List<Car> carList, int maxSpeedCar, PositionOccupation[][] mapa, Cop cop, int mandat);
+    public void movingPeople(int t, List<Human> humanList, MapSimple position);
+    public void movingDogs(int s, List<Dog> dogList, MapSimple position);
+}
